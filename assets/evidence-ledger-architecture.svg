@@ -1,57 +1,73 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 360" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 320" width="100%" height="100%">
   <defs>
-    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0a0f1d" />
-      <stop offset="100%" stop-color="#0f172a" />
+    <linearGradient id="ev-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080d1a" />
+      <stop offset="100%" stop-color="#0e172a" />
     </linearGradient>
-    <filter id="shadow2" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.6"/>
+    <marker id="arr-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#c084fc" />
+    </marker>
+    <marker id="arr-cyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#34d399" />
+    </marker>
+    <filter id="ev-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.5"/>
     </filter>
   </defs>
 
-  <rect width="1000" height="360" rx="16" fill="url(#bg2)" stroke="#1e293b" stroke-width="2" />
+  <rect width="1000" height="320" rx="14" fill="url(#ev-bg)" stroke="#1e293b" stroke-width="1.5" />
 
-  <text x="40" y="45" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="700" fill="#f8fafc">EVIDENCE LEDGER: CRYPTOGRAPHIC CLAIM PROVENANCE</text>
-  <text x="40" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="500" fill="#94a3b8">Append-Only SHA-256 Chained Claim-to-Source Verification Graph</text>
+  <text x="35" y="42" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="700" fill="#f8fafc">
+    EVIDENCE LEDGER: CRYPTOGRAPHIC CLAIM PROVENANCE
+  </text>
 
-  <!-- Block 1 -->
-  <g transform="translate(40, 110)" filter="url(#shadow2)">
-    <rect width="260" height="200" rx="12" fill="#0f172a" stroke="#0ea5e9" stroke-width="1.5" />
-    <rect x="0" y="0" width="260" height="36" rx="12" fill="#0369a1" fill-opacity="0.3" />
-    <text x="20" y="24" font-family="sans-serif" font-size="14" font-weight="700" fill="#38bdf8">Claim Node (clm_01)</text>
-    <text x="20" y="65" font-family="sans-serif" font-size="11" fill="#94a3b8">Statement:</text>
-    <text x="20" y="85" font-family="sans-serif" font-size="12" fill="#f8fafc">"Q3 Revenue was $12.4M"</text>
-    <text x="20" y="120" font-family="sans-serif" font-size="11" fill="#94a3b8">Source Content Hash:</text>
-    <text x="20" y="140" font-family="monospace" font-size="11" fill="#a855f7">e3b0c44298fc1c149a...</text>
-    <text x="20" y="175" font-family="sans-serif" font-size="12" fill="#34d399">✓ Citation Verified</text>
+  <!-- Node 1 -->
+  <g transform="translate(35, 75)" filter="url(#ev-shadow)">
+    <rect width="265" height="210" rx="10" fill="#0f172a" stroke="#0284c7" stroke-width="1.5" />
+    <rect x="0" y="0" width="265" height="38" rx="10" fill="#0369a1" fill-opacity="0.25" />
+    <text x="18" y="25" font-family="sans-serif" font-size="14" font-weight="700" fill="#38bdf8">Claim Node (clm_01)</text>
+    <text x="18" y="65" font-family="sans-serif" font-size="11" fill="#94a3b8">Statement:</text>
+    <text x="18" y="85" font-family="sans-serif" font-size="12" font-weight="600" fill="#f8fafc">"Q3 Revenue was $12.4M"</text>
+    <text x="18" y="118" font-family="sans-serif" font-size="11" fill="#94a3b8">Source Content SHA-256:</text>
+    <text x="18" y="138" font-family="monospace" font-size="10" fill="#c084fc">e3b0c44298fc1c149afbf4...</text>
+    <text x="18" y="172" font-family="sans-serif" font-size="11.5" font-weight="600" fill="#34d399">✓ Citation Verified (Exact)</text>
+    <text x="18" y="195" font-family="sans-serif" font-size="11" fill="#38bdf8">Genesis Entry</text>
   </g>
 
-  <!-- Chain Arrow 1 -->
-  <path d="M 320 210 L 350 210" stroke="#a855f7" stroke-width="3" />
-
-  <!-- Block 2 -->
-  <g transform="translate(370, 110)" filter="url(#shadow2)">
-    <rect width="260" height="200" rx="12" fill="#0f172a" stroke="#a855f7" stroke-width="1.5" />
-    <rect x="0" y="0" width="260" height="36" rx="12" fill="#7e22ce" fill-opacity="0.3" />
-    <text x="20" y="24" font-family="sans-serif" font-size="14" font-weight="700" fill="#c084fc">Claim Node (clm_02)</text>
-    <text x="20" y="65" font-family="sans-serif" font-size="11" fill="#94a3b8">Statement:</text>
-    <text x="20" y="85" font-family="sans-serif" font-size="12" fill="#f8fafc">"Latency reduced by 40%"</text>
-    <text x="20" y="120" font-family="sans-serif" font-size="11" fill="#94a3b8">Prev Hash Link:</text>
-    <text x="20" y="140" font-family="monospace" font-size="11" fill="#38bdf8">hash(clm_01)</text>
-    <text x="20" y="175" font-family="sans-serif" font-size="12" fill="#34d399">✓ Cryptographically Chained</text>
+  <!-- Arrow 1 -->
+  <g transform="translate(305, 160)">
+    <text x="30" y="-12" font-family="monospace" font-size="10" fill="#c084fc" text-anchor="middle">SHA-256 Link</text>
+    <path d="M 5 0 L 55 0" stroke="#c084fc" stroke-width="2" marker-end="url(#arr-purple)" />
   </g>
 
-  <!-- Chain Arrow 2 -->
-  <path d="M 650 210 L 680 210" stroke="#a855f7" stroke-width="3" />
+  <!-- Node 2 -->
+  <g transform="translate(370, 75)" filter="url(#ev-shadow)">
+    <rect width="265" height="210" rx="10" fill="#0f172a" stroke="#a855f7" stroke-width="1.5" />
+    <rect x="0" y="0" width="265" height="38" rx="10" fill="#581c87" fill-opacity="0.3" />
+    <text x="18" y="25" font-family="sans-serif" font-size="14" font-weight="700" fill="#c084fc">Claim Node (clm_02)</text>
+    <text x="18" y="65" font-family="sans-serif" font-size="11" fill="#94a3b8">Statement:</text>
+    <text x="18" y="85" font-family="sans-serif" font-size="12" font-weight="600" fill="#f8fafc">"Latency reduced by 40%"</text>
+    <text x="18" y="118" font-family="sans-serif" font-size="11" fill="#94a3b8">Prev Hash Link:</text>
+    <text x="18" y="138" font-family="monospace" font-size="10" fill="#38bdf8">hash(clm_01_entry)</text>
+    <text x="18" y="172" font-family="sans-serif" font-size="11.5" font-weight="600" fill="#34d399">✓ Cryptographically Chained</text>
+    <text x="18" y="195" font-family="sans-serif" font-size="11" fill="#c084fc">Sequence: 02</text>
+  </g>
 
-  <!-- Block 3 -->
-  <g transform="translate(700, 110)" filter="url(#shadow2)">
-    <rect width="260" height="200" rx="12" fill="#0f172a" stroke="#10b981" stroke-width="1.5" />
-    <rect x="0" y="0" width="260" height="36" rx="12" fill="#065f46" fill-opacity="0.3" />
-    <text x="20" y="24" font-family="sans-serif" font-size="14" font-weight="700" fill="#34d399">Audit Verifier</text>
-    <text x="20" y="70" font-family="sans-serif" font-size="12" fill="#cbd5e1">• verify_ledger() API</text>
-    <text x="20" y="100" font-family="sans-serif" font-size="12" fill="#cbd5e1">• Real-Time Tamper Detection</text>
-    <text x="20" y="130" font-family="sans-serif" font-size="12" fill="#cbd5e1">• Zero Hallucination Guarantee</text>
-    <text x="20" y="160" font-family="sans-serif" font-size="12" fill="#10b981">Proof Chain Intact</text>
+  <!-- Arrow 2 -->
+  <g transform="translate(640, 160)">
+    <text x="30" y="-12" font-family="monospace" font-size="10" fill="#34d399" text-anchor="middle">Verify</text>
+    <path d="M 5 0 L 55 0" stroke="#34d399" stroke-width="2" marker-end="url(#arr-cyan)" />
+  </g>
+
+  <!-- Node 3 -->
+  <g transform="translate(705, 75)" filter="url(#ev-shadow)">
+    <rect width="260" height="210" rx="10" fill="#0f172a" stroke="#10b981" stroke-width="1.5" />
+    <rect x="0" y="0" width="260" height="38" rx="10" fill="#065f46" fill-opacity="0.3" />
+    <text x="18" y="25" font-family="sans-serif" font-size="14" font-weight="700" fill="#34d399">Audit Verifier Engine</text>
+    <text x="18" y="68" font-family="sans-serif" font-size="12" fill="#cbd5e1">• verify_ledger() API</text>
+    <text x="18" y="98" font-family="sans-serif" font-size="12" fill="#cbd5e1">• Real-Time Tamper Detection</text>
+    <text x="18" y="128" font-family="sans-serif" font-size="12" fill="#cbd5e1">• Zero Hallucination Guarantee</text>
+    <text x="18" y="158" font-family="sans-serif" font-size="12" fill="#cbd5e1">• SQLite + JSONL Backends</text>
+    <text x="18" y="190" font-family="sans-serif" font-size="11" fill="#34d399">Mathematical Proof Valid</text>
   </g>
 </svg>
