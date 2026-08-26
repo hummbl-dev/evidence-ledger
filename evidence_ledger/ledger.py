@@ -58,10 +58,10 @@ class ClaimEvidencePacket:
     """Authentic HUMMBL Claim-Evidence Packet conforming to claim-evidence-ledger-v0.1.json."""
     schemaVersion: str = "0.1"
     packetStatus: str = "verified"  # "candidate", "verified", "superseded", "withdrawn"
-    ledgerManifest: LedgerManifest = None
-    authority: Authority = None
-    claimEvidenceContract: ClaimEvidenceContract = None
-    receiptRequirements: ReceiptRequirements = None
+    ledgerManifest: Optional[LedgerManifest] = None
+    authority: Optional[Authority] = None
+    claimEvidenceContract: Optional[ClaimEvidenceContract] = None
+    receiptRequirements: Optional[ReceiptRequirements] = None
     prevHash: str = "0" * 64
     packetHash: str = ""
 
