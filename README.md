@@ -35,10 +35,9 @@ from evidence_ledger import EvidenceLedger
 ledger = EvidenceLedger()
 doc = "Revenue grew 42% YoY to $12.4M."
 claim = ledger.record_claim(
-    statement="Q3 revenue was $12.4M",
+    claim="Q3 revenue was $12.4M",
     source_uri="q3_report.pdf",
-    source_text=doc,
-    snippet="$12.4M",
+    source_content=doc,
 )
 
 valid, err = ledger.verify_ledger()
@@ -48,5 +47,5 @@ assert valid is True
 ---
 
 <div align="center">
-  <sub>Part of the <a href="https://github.com/hummbl-dev">HUMMBL Developer Ecosystem</a>.</sub>
+  <sub>Part of the <a href="https://github.com/hummbl-dev">HUMMBL Developer Ecosystem</a> &bull; Dual-licensed under <a href="LICENSE-APACHE">Apache 2.0</a> and <a href="LICENSE-MIT">MIT</a>.</sub>
 </div>
