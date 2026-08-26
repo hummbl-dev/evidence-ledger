@@ -12,6 +12,17 @@ license-files = ["LICENSE-APACHE", "LICENSE-MIT"]
 authors = [{ name = "Reuben Bowlby", email = "reuben@hummbl.io" }]
 requires-python = ">=3.10"
 dependencies = []
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries",
+]
 
 [project.scripts]
 evidence-ledger = "evidence_ledger.cli:main"
@@ -21,6 +32,10 @@ where = ["."]
 include = ["evidence_ledger*"]
 exclude = ["assets*", "tests*", "examples*"]
 
+[project.urls]
+Homepage = "https://github.com/hummbl-dev/evidence-ledger"
+Repository = "https://github.com/hummbl-dev/evidence-ledger"
+Issues = "https://github.com/hummbl-dev/evidence-ledger/issues"
 [project.optional-dependencies]
 dev = ["pytest>=7.0"]
 

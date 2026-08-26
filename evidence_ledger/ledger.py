@@ -87,7 +87,7 @@ class ClaimEvidencePacket:
 class EvidenceLedger:
     """Cryptographic claim-evidence provenance ledger."""
 
-    def __init__(self, ledger_id: str = "hummbl-evidence-v0.1", title: str = "HUMMBL Claim-Evidence Ledger") -> None:
+    def __init__(self, ledger_id: str = "hummbl-evidence-v0.1", title: str = "HUMMBL Claim-Evidence Ledger", persist_path: Optional[str] = None) -> None:
         self.manifest = LedgerManifest(
             id=ledger_id,
             title=title,
@@ -97,6 +97,9 @@ class EvidenceLedger:
         self.authority = Authority(id="auth-gemini-agent", name="Gemini Governance Agent", uri="https://hummbl.io/agents")
         self.packets: List[ClaimEvidencePacket] = []
         self._last_hash = "0" * 64
+        self.persist_path = persist_path
+        if persist_path:
+            self._load()
 
     def record_claim(
         self,
@@ -138,7 +141,44 @@ class EvidenceLedger:
 
         self._last_hash = packet.packetHash
         self.packets.append(packet)
+        if self.persist_path:
+            self._persist(packet)
         return packet
+
+    def _load(self) -> None:
+        """Load packets from JSONL persist file and rebuild hash chain."""
+        from os.path import exists
+        if not exists(self.persist_path):
+            return
+        with open(self.persist_path, "r", encoding="utf-8") as f:
+            for line in f:
+                if not line.strip():
+                    continue
+                d = json.loads(line)
+                contract = ClaimEvidenceContract(
+                    claim=d["claimEvidenceContract"]["claim"],
+                    evidenceType=d["claimEvidenceContract"]["evidenceType"],
+                    sourceReference=SourceReference(**d["claimEvidenceContract"]["sourceReference"]),
+                    verificationStatus=d["claimEvidenceContract"]["verificationStatus"],
+                    receiptRef=ReceiptRef(**d["claimEvidenceContract"]["receiptRef"]),
+                )
+                self.packets.append(ClaimEvidencePacket(
+                    schemaVersion=d["schemaVersion"],
+                    packetStatus=d["packetStatus"],
+                    ledgerManifest=self.manifest,
+                    authority=self.authority,
+                    claimEvidenceContract=contract,
+                    receiptRequirements=ReceiptRequirements(**d["receiptRequirements"]),
+                    prevHash=d["prevHash"],
+                    packetHash=d["packetHash"],
+                ))
+        if self.packets:
+            self._last_hash = self.packets[-1].packetHash
+
+    def _persist(self, packet: ClaimEvidencePacket) -> None:
+        """Append packet to JSONL persist file."""
+        with open(self.persist_path, "a", encoding="utf-8") as f:
+            f.write(json.dumps(packet.to_dict()) + "\n")
 
     def verify_ledger(self) -> Tuple[bool, Optional[str]]:
         """Mathematically verify the hash chain integrity across all packets."""

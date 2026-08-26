@@ -18,7 +18,7 @@ def main() -> None:
     subparsers.add_parser("verify", help="Verify ledger cryptographic integrity")
 
     args = parser.parse_args()
-    ledger = EvidenceLedger()
+    ledger = EvidenceLedger(persist_path=".evidence-ledger.jsonl")
 
     if args.command == "add":
         packet = ledger.record_claim(
