@@ -13,7 +13,7 @@ def main() -> None:
     p_add = subparsers.add_parser("add", help="Anchor a claim with citation evidence")
     p_add.add_argument("claim", help="Claim statement")
     p_add.add_argument("--source", "-s", required=True, help="Source URI or file path")
-    p_add.add_argument("--snippet", "-q", required=True, help="Exact quoted snippet from source")
+    p_add.add_argument("--content", "-c", required=True, help="Raw source content to hash")
 
     subparsers.add_parser("verify", help="Verify ledger cryptographic integrity")
 
@@ -21,14 +21,14 @@ def main() -> None:
     ledger = EvidenceLedger()
 
     if args.command == "add":
-        entry = ledger.record_claim(
-            statement=args.claim,
+        packet = ledger.record_claim(
+            claim=args.claim,
             source_uri=args.source,
-            source_text=args.snippet,
-            snippet=args.snippet,
+            source_content=args.content,
         )
-        print(f"Claim Recorded: [{entry.claim_id}]")
-        print(f"Hash: {entry.entry_hash}")
+        print(f"Claim Packet Created: [{packet.claimEvidenceContract.receiptRef.receiptId}]")
+        print(f"Source SHA-256: {packet.claimEvidenceContract.sourceReference.contentHash}")
+        print(f"Packet Hash: {packet.packetHash}")
     elif args.command == "verify":
         valid, err = ledger.verify_ledger()
         if valid:
