@@ -9,3 +9,6 @@ build/
 *.egg-info/
 .DS_Store
 .evidence-ledger.jsonl
+
+# Shared lint config (symlinked, not committed)
+hummbl_lint_config
